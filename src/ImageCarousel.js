@@ -3,7 +3,7 @@ import CarouselNav from "./CarouselNav";
 
 function buildCarouselImgsContainerHtml() {
   const carouselImgsContainerHtml = document.createElement("div");
-  carouselImgsContainerHtml.classList.add("carousel-img-container");
+  carouselImgsContainerHtml.classList.add("carousel-imgs-container");
   return carouselImgsContainerHtml;
 }
 
@@ -21,8 +21,9 @@ export default function ImageCarousel(imageFilesList) {
     "div",
     carouselDisplayBoxHtml,
     carouselImgsContainerHtml,
-    carouselNav,
+    carouselNav.HTML,
   );
+  HTML.classList.add("image-carousel");
 
   function addImage(imageFile) {
     const imgHtml = buildImgHtml(imageFile);
@@ -31,7 +32,9 @@ export default function ImageCarousel(imageFilesList) {
   }
 
   function displayNthImage(n) {
-    console.log(`Display image number ${n}...`);
+    return function () {
+      console.log(`Display image number ${n}...`);
+    };
   }
 
   imageFilesList.forEach((imageFile, index) => {
