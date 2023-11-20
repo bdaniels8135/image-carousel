@@ -16,11 +16,11 @@ function buildCarouselDisplayBoxHtml() {
 export default function ImageCarousel(imageFilesList) {
   const carouselDisplayBoxHtml = buildCarouselDisplayBoxHtml();
   const carouselImgsContainerHtml = buildCarouselImgsContainerHtml();
+  carouselDisplayBoxHtml.appendChild(carouselImgsContainerHtml);
   const carouselNav = CarouselNav();
   const HTML = wrapHtmlElements(
     "div",
     carouselDisplayBoxHtml,
-    carouselImgsContainerHtml,
     carouselNav.HTML,
   );
   HTML.classList.add("image-carousel");
@@ -28,7 +28,9 @@ export default function ImageCarousel(imageFilesList) {
   function addImage(imageFile) {
     const imgHtml = buildImgHtml(imageFile);
     imgHtml.classList.add("carousel-img");
-    carouselImgsContainerHtml.appendChild(imgHtml);
+    const wrappedImgHtml = wrapHtmlElements("div", imgHtml);
+    wrappedImgHtml.classList.add("carousel-img-container");
+    carouselImgsContainerHtml.appendChild(wrappedImgHtml);
   }
 
   function displayNthImage(n) {
