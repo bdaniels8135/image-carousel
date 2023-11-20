@@ -23,7 +23,9 @@ export default function CarouselNav(
   rightBtnIcon = defaultRightBtnIcon,
 ) {
   const leftBtnHtml = buildImgHtml(leftBtnIcon);
+  leftBtnHtml.classList.add("nav-btn");
   const rightBtnHtml = buildImgHtml(rightBtnIcon);
+  rightBtnHtml.classList.add("nav-btn");
   const navDotsContainerHtml = buildNavDotsContainerHtml();
   const HTML = wrapHtmlElements(
     "nav",
