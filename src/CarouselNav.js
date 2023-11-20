@@ -7,9 +7,7 @@ const defaultLeftBtnIcon = leftArrowIcon;
 
 function buildNavDotHtml(clickFunc) {
   const navDotHtml = document.createElement("div");
-  navDotHtml.addEventListener("click", (event) => {
-    clickFunc(event);
-  });
+  navDotHtml.addEventListener("click", clickFunc);
   navDotHtml.classList.add("nav-dot");
   return navDotHtml;
 }
@@ -34,13 +32,13 @@ export default function CarouselNav(
     rightBtnHtml,
   );
 
-  function appendNavDot(clickFunc) {
+  function createNavDot(clickFunc) {
     const newNavDotHtml = buildNavDotHtml(clickFunc);
     navDotsContainerHtml.appendChild(newNavDotHtml);
   }
 
   return {
     HTML,
-    appendNavDot,
+    createNavDot,
   };
 }
