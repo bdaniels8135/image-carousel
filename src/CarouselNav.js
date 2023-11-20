@@ -19,13 +19,17 @@ function buildNavDotsContainerHtml() {
 }
 
 export default function CarouselNav(
+  leftBtnClickFunc,
+  rightBtnClickFunc,
   leftBtnIcon = defaultLeftBtnIcon,
   rightBtnIcon = defaultRightBtnIcon,
 ) {
   const leftBtnHtml = buildImgHtml(leftBtnIcon);
   leftBtnHtml.classList.add("nav-btn");
+  leftBtnHtml.addEventListener("click", leftBtnClickFunc);
   const rightBtnHtml = buildImgHtml(rightBtnIcon);
   rightBtnHtml.classList.add("nav-btn");
+  rightBtnHtml.addEventListener("click", rightBtnClickFunc);
   const navDotsContainerHtml = buildNavDotsContainerHtml();
   const HTML = wrapHtmlElements(
     "nav",
