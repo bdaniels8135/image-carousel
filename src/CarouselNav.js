@@ -33,6 +33,7 @@ export default function CarouselNav(
     navDotsContainerHtml,
     rightBtnHtml,
   );
+  HTML.classList.add("carousel-nav");
 
   function createNavDot(clickFunc) {
     const newNavDotHtml = buildNavDotHtml(clickFunc);
