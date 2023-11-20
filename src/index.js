@@ -9,4 +9,4 @@ const testImagesList = [leafImg, flowerImg];
 const imageCarousel = ImageCarousel(testImagesList);
 
 const body = document.querySelector("body");
-body.appendChild(imageCarousel);
+body.appendChild(imageCarousel.HTML);
