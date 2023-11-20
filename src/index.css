@@ -57,6 +57,7 @@
   width: 1.5rem;
   border: 3px solid rgb(175, 175, 175);
   border-radius: 50%;
+  cursor: pointer;
 }
 
 .nav-dot.displayed {
@@ -65,6 +66,7 @@
 
 .nav-btn {
   height: 3rem;
+  cursor: pointer;
 }
 
 .nav-dot:hover,
