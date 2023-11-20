@@ -21,21 +21,28 @@ export default function ImageCarousel(imageFilesList) {
   const numOfImages = imageFilesList.length;
   let displayedIndex = 0;
 
+  function setTransformStyle() {
+    carouselImgsContainerHtml.style.transform = `translate(calc(-100% / ${numOfImages} * ${displayedIndex}))`;
+  }
+
   function createDisplayNthImageFunc(n) {
     return () => {
       displayedIndex = n;
-      carouselImgsContainerHtml.style.transform = `translate(calc(-100% / ${numOfImages} * ${displayedIndex}))`;
+      setTransformStyle();
+      markNthDotAsDisplayed(displayedIndex);
     };
   }
 
   function displayNextImage() {
     displayedIndex = (displayedIndex + 1) % numOfImages;
-    carouselImgsContainerHtml.style.transform = `translate(calc(-100% / ${numOfImages} * ${displayedIndex}))`;
+    setTransformStyle();
+    markNthDotAsDisplayed(displayedIndex);
   }
 
   function displayPreviousImage() {
     displayedIndex = (displayedIndex + numOfImages - 1) % numOfImages;
-    carouselImgsContainerHtml.style.transform = `translate(calc(-100% / ${numOfImages} * ${displayedIndex}))`;
+    setTransformStyle();
+    markNthDotAsDisplayed(displayedIndex);
   }
 
   const carouselNav = CarouselNav(displayPreviousImage, displayNextImage);
@@ -46,6 +53,14 @@ export default function ImageCarousel(imageFilesList) {
     carouselNav.HTML,
   );
   HTML.classList.add("image-carousel");
+
+  function markNthDotAsDisplayed(n) {
+    const navDots = HTML.querySelectorAll(".nav-dot");
+    navDots.forEach((navDot) => {
+      navDot.classList.remove("displayed");
+    });
+    navDots[n].classList.add("displayed");
+  }
 
   function addImage(imageFile) {
     const imgHtml = buildImgHtml(imageFile);
@@ -59,6 +74,8 @@ export default function ImageCarousel(imageFilesList) {
     addImage(imageFile);
     carouselNav.createNavDot(createDisplayNthImageFunc(index));
   });
+
+  markNthDotAsDisplayed(0);
 
   return {
     HTML,
