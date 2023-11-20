@@ -25,11 +25,15 @@ export default function ImageCarousel(imageFilesList) {
     carouselImgsContainerHtml.style.transform = `translate(calc(-100% / ${numOfImages} * ${displayedIndex}))`;
   }
 
+  let intervalId;
+
   function createDisplayNthImageFunc(n) {
     return () => {
       displayedIndex = n;
       setTransformStyle();
       markNthDotAsDisplayed(displayedIndex);
+      clearInterval(intervalId);
+      intervalId = setInterval(displayNextImage, 5000);
     };
   }
 
@@ -37,12 +41,16 @@ export default function ImageCarousel(imageFilesList) {
     displayedIndex = (displayedIndex + 1) % numOfImages;
     setTransformStyle();
     markNthDotAsDisplayed(displayedIndex);
+    clearInterval(intervalId);
+    intervalId = setInterval(displayNextImage, 5000);
   }
 
   function displayPreviousImage() {
     displayedIndex = (displayedIndex + numOfImages - 1) % numOfImages;
     setTransformStyle();
     markNthDotAsDisplayed(displayedIndex);
+    clearInterval(intervalId);
+    intervalId = setInterval(displayNextImage, 5000);
   }
 
   const carouselNav = CarouselNav(displayPreviousImage, displayNextImage);
@@ -77,7 +85,10 @@ export default function ImageCarousel(imageFilesList) {
 
   markNthDotAsDisplayed(0);
 
+  intervalId = setInterval(displayNextImage, 5000);
+
   return {
     HTML,
+    displayNextImage,
   };
 }
