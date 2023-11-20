@@ -17,7 +17,29 @@ export default function ImageCarousel(imageFilesList) {
   const carouselDisplayBoxHtml = buildCarouselDisplayBoxHtml();
   const carouselImgsContainerHtml = buildCarouselImgsContainerHtml();
   carouselDisplayBoxHtml.appendChild(carouselImgsContainerHtml);
-  const carouselNav = CarouselNav();
+
+  const numOfImages = imageFilesList.length;
+  let displayedIndex = 0;
+
+  function createDisplayNthImageFunc(n) {
+    return () => {
+      displayedIndex = n;
+      carouselImgsContainerHtml.style.transform = `translate(calc(-100% / ${numOfImages} * ${displayedIndex}))`;
+    };
+  }
+
+  function displayNextImage() {
+    displayedIndex = (displayedIndex + 1) % numOfImages;
+    carouselImgsContainerHtml.style.transform = `translate(calc(-100% / ${numOfImages} * ${displayedIndex}))`;
+  }
+
+  function displayPreviousImage() {
+    displayedIndex = (displayedIndex + numOfImages - 1) % numOfImages;
+    carouselImgsContainerHtml.style.transform = `translate(calc(-100% / ${numOfImages} * ${displayedIndex}))`;
+  }
+
+  const carouselNav = CarouselNav(displayPreviousImage, displayNextImage);
+
   const HTML = wrapHtmlElements(
     "div",
     carouselDisplayBoxHtml,
@@ -33,15 +55,9 @@ export default function ImageCarousel(imageFilesList) {
     carouselImgsContainerHtml.appendChild(wrappedImgHtml);
   }
 
-  function displayNthImage(n) {
-    return function () {
-      console.log(`Display image number ${n}...`);
-    };
-  }
-
   imageFilesList.forEach((imageFile, index) => {
     addImage(imageFile);
-    carouselNav.createNavDot(displayNthImage(index));
+    carouselNav.createNavDot(createDisplayNthImageFunc(index));
   });
 
   return {
