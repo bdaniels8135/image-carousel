@@ -1,0 +1,78 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  border: 1px dashed red;
+}
+
+.image-carousel {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  gap: 2rem;
+  align-items: center;
+}
+
+.carousel-display-box {
+  height: 800px;
+  width: 800px;
+  position: relative;
+  overflow: hidden;
+}
+
+.carousel-imgs-container {
+  position: absolute;
+}
+
+.carousel-img-container {
+  height: 800px;
+  width: 800px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.carousel-img {
+  max-width: 800px;
+  max-height: 800px;
+}
+
+/* Nav Styling */
+.carousel-nav {
+  display: flex;
+  width: 800px;
+}
+
+.nav-dots-container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.nav-dot {
+  height: 1.5rem;
+  width: 1.5rem;
+  border: 3px solid rgb(175, 175, 175);
+  border-radius: 50%;
+}
+
+.nav-dot.displayed {
+  background-color: rgb(175, 175, 175);
+}
+
+.nav-btn {
+  height: 3rem;
+}
+
+.nav-dot:hover,
+.nav-btn:hover {
+  background-color: rgb(225, 225, 225);
+}
+
+.nav-dot:active,
+.nav-btn:active {
+  background-color: rgb(175, 175, 175);
+  box-shadow: .25rem .25rem .25rem grey;
+}
